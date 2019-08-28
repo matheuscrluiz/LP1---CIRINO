@@ -1,0 +1,21 @@
+//Escreva um programa em C que calcule o fatorial de um número inteiro positivo.//
+
+#include <stdio.h>
+
+int main(void)
+{
+	int numero, fat;
+
+	printf("\nDigite um valor: ");
+	scanf("%d", &numero);
+
+	fat = numero;
+
+	while(numero>1)
+		{
+			numero--;			
+			fat= fat*numero;
+		}
+	printf("%d", fat);
+	return 0;
+}
