@@ -14,13 +14,9 @@ int main (void)
         {
             if((n % 3 == 2) && (n % 5 ==3 ) && (n % 7 == 4)) 
                 {
-                    printf("\n Acertou! O número é: %d", n);
+                    printf("\nO número que atende as condições é: %d", n);
                     break;
                 }
-            else
-                {
-                    printf("\n Não achei");
-                }    
             n++;
           }
     return 0;
