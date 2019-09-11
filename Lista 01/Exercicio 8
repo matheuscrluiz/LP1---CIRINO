@@ -1,36 +1,39 @@
-/*8)Para um vetor A de 50 números inteiros, escrever um programa em C que determine o maior e o segundo
-maior elemento desse vetor. Assumir que todos os elementos são distintos.*/
+/*8)Para um vetor A de 50 números inteiros, escrever um programa em C que determine o maior e o segundo maior elemento desse vetor. Assumir que todos os elementos são distintos.*/
 
 #include <stdio.h>
 
 int main (void)
 {
-    int vetor[5];
-    int aux =0, i, j;
+	int vetor[10], aux =0;
+	int i, j;
 
-    for(i=0;i<5;i++)
-        {
-            printf("\nDigite o valor da posição nº %d: ", i);
-            scanf("%d", &vetor[i]);
-        }
-    for(i=0;i<5;i++)
-        {
-            for(j=0;j<5;j++)
-                {
-                    if(vetor[i] > vetor[j])
-                        {
-                            aux = vetor[i];
-                            vetor[i] = vetor[j];
-                            vetor[j] = aux;
-                        }
-                }
-        }
-    printf("\nOs vetores ordenados são:\n");    
-    for(i=0;i<5;i++)
-        {            
-            printf(" %d - ", vetor[i]);
-        }
-    printf("\nOs dois maiores valores são:\n");
-    printf(" %d e %d", vetor[0], vetor[1]);
-    return 0;
+	for(i=0;i<10;i++)
+		{
+			printf("\nDigite o valor da posição %d: ", i);
+			scanf("%d", &vetor[i]);
+		}
+	
+	for(i=0;i<10;i++)
+		{	
+			for(j=0;j<10;j++)
+				{
+					if(vetor[i] > vetor[j])
+						{
+							aux = vetor[i];
+							vetor[i] = vetor[j];
+							vetor[j] = aux;
+						}
+				}
+		}
+
+	printf("\nOs valores ordenados são:\n ");
+
+	for(i=0;i<10;i++)
+		{	
+			printf("%d - ", vetor[i]);
+		}
+
+	printf("\n\n Os dois maiores números digitados são: %d e %d ", vetor[0], vetor[1]);
+	
+	return 0;
 }
