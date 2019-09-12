@@ -1,0 +1,32 @@
+/*10)Escrever um programa em C que calcule a frequência de uso de cada palavra dentro de uma cadeia de
+caracteres que possui diversas palavras. Considerar o tamanho máximo da cadeia como sendo de 80
+colunas.*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define N 64
+
+int main (void)
+{
+	char frase[N];
+	unsigned int i;
+	int soma =0;
+
+	printf("\nDigite: ");
+	gets(frase);
+
+	for(i=0;i<strlen(frase);i++)
+		{
+			if(frase[i] == ' ')
+				{
+					soma++; /*soma a quantidade de espaços digitados na frase */
+				}
+		}
+	printf("\nA quantida de palavras digitadas foi de: %d", soma+1);
+
+	/*(soma+1) pois soma todos os espaços antes da ultima palavra e a soma tb */
+
+	return 0;
+}
