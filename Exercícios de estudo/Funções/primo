@@ -1,0 +1,48 @@
+/*Crie uma função eh_primo que recebe um inteiro n e retorna se ele é primo ou não.*/
+
+#include <stdio.h>
+
+int main(void)
+{
+	int numero, count;
+	
+	printf("\nDigite um número: ");
+	scanf("%d", &numero);
+
+	int eh_primo(int numero);
+	eh_primo(numero);
+
+	if(eh_primo(numero) == 1)
+		{
+			printf("\nO número %d é primo!", numero);
+		}
+	else
+		{
+			printf("\nO número %d não é primo!", numero);
+		}
+
+	return 0;
+}
+
+
+int eh_primo(int n)
+{
+	int i=1, count=0;
+
+	for(i=1;i<=n;i++)
+		{
+			if(n % i == 0)
+				{
+					count++;
+				}
+		}
+	
+	if(count == 2)
+		{
+			return 1;
+		}
+	else
+		{
+			return 0;
+		}
+}
