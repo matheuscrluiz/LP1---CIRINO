@@ -1,26 +1,35 @@
 /*9) Escrever um programa em C que calcule e imprima o número de caracteres distintos presentes em uma cadeia de caracteres dada.
-Considerar o tamanho máximo da cadeia como sendo de 80 colunas.
+Considerar o tamanho máximo da cadeia como sendo de 80 colunas. */
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-int main (void)
+int main()
 {
-	char string[80];
-	int i, count=0;
+    char texto[50];
+    int i,c, conta=0;
+    int total;
 
-	printf("\nDigite uma palavra de até 80 letras: ");
-	scanf("%s", string);
+    printf("\nDigite a frase: ");
+    fgets(texto, 50, stdin);
 
-	for(i=0;string[i] != '\0';i++)/*Rodar no for até que seja ñ seja encontrado uma letra na string*/
-		{
-			if(string[i] != '\0')
-				{
-					count++;
-				}
-		}
+    c = strlen(texto);
+    printf("\n %s", texto);
 
-	printf("\nA quantidade de letras digitadas na frase ' %s ' é de: %d ", string, count);
+    printf("\nNumero de letras incluindo espaço = %d", c);
 
-	return 0;
+    for(i=0; i<texto[i]; i++)
+        {
+            if(texto[i]==' ') 
+                {
+                    conta++;
+                }
+        }
+   
+
+    total = c - conta;
+    printf("\nNúmero de espaços:  %d",conta);
+    printf("\nNumero de letras sem espaços = %d", total);
+    return 0;
 }
-*/
