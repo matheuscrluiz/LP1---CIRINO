@@ -1,0 +1,36 @@
+/*11) Escrever um programa em C que leia uma cadeia de caracteres e imprima todas as palavras que
+contenham três ou mais vogais.*/
+
+#include <stdio.h>
+#include <string.h>
+
+int main(void)
+{
+    char nome[80];
+    int i=0;    
+    int count_vogal=0;
+
+    printf("\nDigite a frase: ");
+    fgets(nome, 80, stdin);
+
+    for(int i=0;i<strlen(nome);i++)
+    {
+        if((nome[i] == 'a') || (nome[i] == 'e') || (nome[i] == 'i') || (nome[i] == 'o') || (nome[i] == 'u'))
+            {
+                count_vogal++;
+            }
+    }
+
+    printf("O número de vogais presentes na frase é de: %d ", count_vogal);    
+    
+    if(count_vogal >= 3)
+        {
+            printf("\n' %s ' possui mais de 3 vogais!", nome);
+        }
+    else
+        {
+            printf("\nA frase ' %s ' não tem mais de 3 vogais!", nome);
+        }
+   
+    return 0;
+}
