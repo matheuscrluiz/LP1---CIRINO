@@ -1,0 +1,47 @@
+/*14) Faça um programa em C que simule um cronômetro com horas, minutos e segundos. A simulação
+deverá mostrar no vídeo o cronômetro no seguinte formato HH: MM: SS. Inicialmente o cronômetro será
+zerado ( 00: 00: 00 ), sendo que os segundos começarão a ser incrementados, depois os minutos e
+depois as horas. Lembre-se que a cada 60 segundos os minutos deverão ser incrementados, depois os
+minutos voltarão a zero. Quando as horas estiverem prestes a chegar em 25, o cronômetro deverá
+voltar a zero ( 00: 00: 00 ). */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>//para usar o Sleep()
+ 
+int main(void){
+
+    int sec=0;//segundos
+        int min=0;//minutos
+        int hr=0;//horas
+       
+        int i=0;
+               
+        do {
+                
+               
+                printf("Cronômetro\n\n");
+               
+                printf("\n\t\t\t\t%dh:%dm:%ds\n\n", hr,min,sec);
+               
+                if(sec==60){
+                    sec=0;
+                    min++;
+                }
+               
+                if(min==60){
+                    min=0;
+                    hr++;
+                }
+               
+                if(hr==24){
+                    hr=0;
+                }
+               
+                sleep(1);//tem a função de pausar a execução por um determinado tempo
+                sec++;
+               
+        }while (i==0);//condição para o loop infinito
+ 
+    return 0;
+}
