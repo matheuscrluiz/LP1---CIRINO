@@ -1,0 +1,62 @@
+/* 15) O Departamento de trânsito do estado anotou dados de acidentes de trânsito no último ano. Para cada
+motorista envolvido no acidente, tem-se as seguintes informações:
+- Ano de nascimento;
+- Sexo (M - Masculino, F - Feminino)
+- Procedência ( 0 - Capital, 1 - Interior, 2 - Outro estado);
+Faça um programa em C que :
+a) Calcule a porcentagem de motoristas com menos de 21 anos;
+b) Calcule quantas mulheres são da capital;
+c) Calcule quantos motoristas do interior do estado tem idade maior que 60 anos;
+d) Verifique se existe alguma mulher com idade maior que 60 anos; */
+
+
+#include <stdio.h>
+
+int main (void)
+{
+	int n_motoristas, porcentagem_novos;
+	int i = 0, count_novos = 0, count_mulheres = 0, count_idoso = 0, count_idosa = 0;
+
+	printf("\nDigite a quantidade de motoristas envolvidos em acidentes: ");
+	scanf("%d", &n_motoristas);
+	
+	int ano[n_motoristas], procedencia[n_motoristas];
+	char sexo[n_motoristas];
+	for(i=0;i<n_motoristas;i++)
+		{
+			printf("\nInforme o seu ano de nascimento: ");
+			scanf("%d", &ano[i]);
+			printf("\nInforme seu sexo [M ou F]: ");
+			scanf("%s", &sexo[i]);
+			printf("\nInforme sua procedência [0 - Capital, 1 - Interior, 2 - Outro estado]: ");
+			scanf("%d", &procedencia[i]);
+
+			if(ano[i] > 1998) /*verificando pessoas com menos de 21 anos */
+				{
+					count_novos++;
+				}
+			if((sexo[i] == 'f') && (procedencia[i] == 0))
+				{
+					count_mulheres++;
+				}
+			if((ano[i] < 1959) && (procedencia[i] == 1))
+				{
+					count_idoso++;
+				}
+			if((sexo[i] == 'f') && (ano[i] < 1959))
+				{
+					count_idosa++;
+				}
+		}	
+
+	porcentagem_novos = (count_novos/n_motoristas);
+	porcentagem_novos = porcentagem_novos * 100;
+	printf("\n\nA porcentagem de motoristas com menos de 21 anos é de: %d", porcentagem_novos);
+	printf("\n\nA quantidade de mulheres que dirigem e moram na capital é de: %d", count_mulheres);
+	printf("\n\nA quantidade de motoristas do interior do estado e com idade maior que 60 anos é de: %d", count_idoso);
+	printf("\n\nA quantidade de mulheres que dirigem e tem mais de 60 anos é de: %d", count_idosa);
+
+
+
+	return 0;
+}
