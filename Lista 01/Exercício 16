@@ -1,0 +1,91 @@
+/* 16) Faça um programa em C que atenda às regras do seguinte jogo de dados. Dois jogadores estão
+confrontando-se entre si, usando dois dados, numerados de 1 até 6 (dado RAND(5) + 1). Vence uma
+rodada quem obtiver o maior número no lançamento. Entretanto, caso um jogador obtiver um
+lançamento com dois dados iguais (por exemplo, 1 e 1, 2 e 2,....) e o outro jogador não, o jogador que
+tiver lançado a dupla ganha. Caso os dois jogadores fizerem o lançamento e o resultado for de duas
+duplas para os dois jogadores, ganha o jogador com a dupla maior. A disputa é em 11 lançamentos.
+Indique o jogador vencedor ou se houve empate. */
+
+#include <stdio.h>
+#include <stdlib.h> /* necessário p/ as funções rand() e srand() */
+#include <time.h> /* necessário p/ função time() */
+
+
+int main(void)
+{
+	int dado1 = 0, dado2 = 0, dado3 = 0, dado4 = 0, jog1=0, jog2=0, jogada=0;
+	srand(time(NULL));                       /* srand(time(NULL)) objetiva inicializar o gerador de números aleatórios
+												com o valor da função time(NULL). Este por sua vez, é calculado
+												como sendo o total de segundos passados desde 1 de janeiro de 1970
+												até a data atual.
+												Desta forma, a cada execução o valor da "semente" será diferente. */
+
+	while(jogada != 3)
+		{
+			dado1=0;	
+			dado2=0;
+			dado3=0;
+			dado4=0;			
+				  
+			dado1 = rand()% 6 + 1;
+			dado2 = rand()% 6 + 1;
+			dado3 = rand()% 6 + 1;					  
+			dado4 = rand()% 6 + 1;	  
+				  
+			jogada++;
+
+			printf("\n\njogada %i\n\n", jogada);
+
+			printf("\ndado1: %i", dado1);
+			printf("\ndado2: %i", dado2);
+			printf("\ndado3: %i", dado3);
+			printf("\ndado4: %i", dado4);
+
+			if((dado1 == dado2) && (dado3 != dado4))
+				{
+					jog1++;
+				}
+			if((dado3 == dado4) && (dado1 != dado2))
+				{
+					jog2++;
+				}
+
+			if((dado1 == dado2) && (dado3 == dado4))
+				{
+					if(dado1 > dado3)
+						{
+							jog1++;
+						}
+					else
+						{
+							jog2++;
+						}				
+				}
+
+
+			if(((dado1 + dado2 > dado3 + dado4) && (dado1 != dado2)  && (dado3 != dado4)))
+				{
+					jog1++;
+				}
+			if(((dado1 + dado2 < dado3 + dado4) && (dado1 != dado2)  && (dado3 != dado4)))
+				{
+					jog2++;
+				}
+
+			
+			printf("\n\nPlacar: jogador 1: %i   x   jogador 2: %i\n", jog1, jog2);
+		}
+	if(jog1 > jog2)
+		{
+			printf("\n\nJOGADOR 1 VENCEU!!\n\n");
+	  	}
+	if(jog1 < jog2)
+		{
+			printf("\n\nJOGADOR 2 VENCEU!!\n\n");
+		}
+	if(jog1 == jog2)
+		{
+			printf("\n\nEMPATE!!\n\n");
+		}
+	return 0;
+}
