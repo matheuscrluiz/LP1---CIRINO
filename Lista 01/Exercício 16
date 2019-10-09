@@ -20,7 +20,7 @@ int main(void)
 						    até a data atual.
 						    Desta forma, a cada execução o valor da "semente" será diferente. */
 
-	while(jogada != 3)
+	while(jogada != 11)
 		{
 			dado1=0;	
 			dado2=0;
