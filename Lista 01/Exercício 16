@@ -15,9 +15,7 @@ int main(void)
 {
 	int dado1 = 0, dado2 = 0, dado3 = 0, dado4 = 0, jog1=0, jog2=0, jogada=0;
 	srand(time(NULL));                       /* srand(time(NULL)) objetiva inicializar o gerador de números aleatórios
-						    com o valor da função time(NULL). Este por sua vez, é calculado
-					            como sendo o total de segundos passados desde 1 de janeiro de 1970
-						    até a data atual.
+						    com o valor da função time(NULL). 
 						    Desta forma, a cada execução o valor da "semente" será diferente. */
 
 	while(jogada != 11)
