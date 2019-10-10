@@ -1,11 +1,11 @@
-/*13) Dados três vetores com 10 posições cada um, preenchidos com números inteiros, fazer um programa em C que, após a leitura dos vetores coloque-os em ordem crescente.*/
+/*13) Dados três vetores com 10 posições cada um, preenchidos com números inteiros, fazer um programa em C que,
+após a leitura dos vetores coloque-os em ordem crescente.*/
 
 #include <stdio.h>
-#include <string.h>
 
 int main (void)
 {
-	int vet[10], vet2[10], vet3[40];
+	int vet[10], vet2[10], vet3[10], vet4[50];
 	int i=0;
 	int j =0;
 	int aux;
@@ -23,41 +23,53 @@ int main (void)
 			printf("\nDigite o valor da posição %d: ", i);
 			scanf("%d", &vet2[i]);
 		}
-
+	
+	 printf("\n  TERCEIRO VETOR!  ");
+	for(i=0;i<10;i++)
+	    {
+	        printf("\nDigite o valor da posição %d: ", i);
+	        scanf("%d", &vet3[i]);
+	    }
+    
 	for(i=0;i<10;i++)
 		{
-			vet3[i] = vet[i];
+			vet4[i] = vet[i];
 		}
 	
 	for(i=10;i<20;i++)
 		{
-			vet3[i] = vet2[i-10];
+			vet4[i] = vet2[i-10];
+		}
+		
+    for(i=20;i<30;i++)
+        {
+            vet4[i] = vet3[i-20];
+        }
+
+	printf("\n QUARTO VETOR DESORDENADO!  ");
+	for ( i = 0; i < 30; i++ )
+		{
+    	printf("%d -", vet4[i] );
 		}
 
-	printf("\n TERCEIRO VETOR DESORDENADO!  ");
-	for ( i = 0; i < 20; i++ )
+	for(i=0;i<30;i++)
 		{
-    	printf("%d -", vet3[i] );
-		}
-
-	for(i=0;i<20;i++)
-		{
-			for(j=i;j<20;j++)
+			for(j=i;j<30;j++)
 				{
-					if(vet3[i] > vet3[j])
+					if(vet4[i] > vet4[j])
 						{
-							aux=vet3[i];
-							vet3[i] = vet3[j];
-							vet3[j] = aux;
+							aux=vet4[i];
+							vet4[i] = vet4[j];
+							vet4[j] = aux;
 						}
 				}
 		}
 
-	printf("\n TERCEIRO VETOR ORDENADO!  ");
-	for ( i = 0; i < 20; i++ )
+	printf("\n QUARTO VETOR ORDENADO!  ");
+	for ( i = 0; i <30; i++ )
 		{
-    	printf("%d -", vet3[i] );
+    	printf("%d -", vet4[i] );
 		}
-
+    
 	return 0;
 }
