@@ -8,8 +8,9 @@ Considerar o tamanho máximo da cadeia como sendo de 80 colunas. */
 int main()
 {
     char texto[50];
-    int i,c, conta=0;
+    int i,c, conta=1;
     int total;
+	int repetidos=0;
 
     printf("\nDigite a frase: ");
     fgets(texto, 50, stdin);
@@ -17,7 +18,7 @@ int main()
     c = strlen(texto);
     printf("\n %s", texto);
 
-    printf("\nNumero de letras incluindo espaço = %d", c);
+   
 
     for(i=0; i<texto[i]; i++)
         {
@@ -26,10 +27,20 @@ int main()
                     conta++;
                 }
         }
-   
+   for(i=0;i<texto[i];i++)
+		{
+			for(int j=i+1;j<texto[j];j++)
+				{
+					if(texto[i] == texto[j])
+						{
+							repetidos++;
+						}
+				}
+		}
 
-    total = c - conta;
-    printf("\nNúmero de espaços:  %d",conta);
-    printf("\nNumero de letras sem espaços = %d", total);
+    total = c - conta - repetidos;
+    
+    printf("\nNumero de letras retirando repetidos = %d", total);
+	
     return 0;
 }
