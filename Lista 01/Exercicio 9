@@ -7,13 +7,13 @@ Considerar o tamanho máximo da cadeia como sendo de 80 colunas. */
 
 int main()
 {
-    char texto[50];
+    char texto[80];
     int i,c, conta=1;
     int total;
 	int repetidos=0;
 
     printf("\nDigite a frase: ");
-    fgets(texto, 50, stdin);
+    fgets(texto, 80, stdin);
 
     c = strlen(texto);
     printf("\n %s", texto);
@@ -27,6 +27,8 @@ int main()
                     conta++;
                 }
         }
+	printf("\nNúmero de letras com repetidos = %d", c-conta);	
+
    for(i=0;i<texto[i];i++)
 		{
 			for(int j=i+1;j<texto[j];j++)
