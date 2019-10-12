@@ -25,11 +25,11 @@ int main(void)
     
     if(count_vogal >= 3)
         {
-            printf("\n' %s ' possui mais de 3 vogais!", nome);
+            printf("\n' %s '", nome);
         }
     else
         {
-            printf("\nA frase ' %s ' não tem mais de 3 vogais!", nome);
+            printf("\nA frase não possui mais de 3 vogais.");
         }
    
     return 0;
