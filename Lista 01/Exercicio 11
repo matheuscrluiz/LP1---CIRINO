@@ -4,33 +4,68 @@ contenham três ou mais vogais.*/
 #include <stdio.h>
 #include <string.h>
 
-int main(void)
+int main()
 {
-    char nome[80];
-    int i=0;    
-    int count_vogal=0;
 
-    printf("\nDigite a frase: ");
-    fgets(nome, 80, stdin);
+	int i,j,aux=0,posicao,x=0,cont=1,cont2=0,resultado=0;
+	char frase[80];
 
-    for(int i=0;i<strlen(nome);i++)
-    {
-        if((nome[i] == 'a') || (nome[i] == 'e') || (nome[i] == 'i') || (nome[i] == 'o') || (nome[i] == 'u'))
-            {
-                count_vogal++;
-            }
-    }
+	printf("Digite a frase: ");
+	fgets(frase,80,stdin);
+	
+	x=strlen(frase);
 
-    printf("O número de vogais presentes na frase é de: %d ", count_vogal);    
-    
-    if(count_vogal >= 3)
-        {
-            printf("\n' %s '", nome);
-        }
-    else
-        {
-            printf("\nA frase não possui mais de 3 vogais.");
-        }
-   
-    return 0;
+//quant de palavras na cadeia
+	for (i=0;i<x;i++) 
+		{
+			if (frase[i]==' ') 
+				{
+					cont++;
+				}
+		}
+
+	printf("\nQuantida de de palavras na frase é de: %d\n",cont);
+	printf("\nQuantidade de caracteres na frase é de: %d",x);
+
+	char palavras[cont][80];
+//limpar a memoria do vetor char palavras
+
+	for(i=0;i<cont;i++) 
+		{
+			memset(palavras[i],'\0', 80);
+		}
+
+//separando as palavras da cadeia
+	for (i=0,posicao=0,aux=0; i<x; i++) 
+		{
+			if (frase[i]!=' ') 
+				{
+					palavras[posicao][aux]=frase[i];
+					aux++;
+				}
+			else 
+				{
+					posicao++;
+					aux=0;
+				}
+		}
+
+//imprimindo as palavras com mais de 3 vogais
+	for (posicao=0; posicao<cont; posicao++) 
+		{
+			resultado=strlen(palavras[posicao]);
+			for (j=0;j<resultado;j++) 
+				{
+					if (palavras[posicao][j]=='a'||palavras[posicao][j]=='e'||palavras[posicao][j]=='i'||palavras[posicao][j]=='o'||palavras[posicao][j]=='u'||palavras[posicao][j]=='U')
+						{
+							cont2++;
+						}
+				}
+	if (cont2>=3) 
+		{
+			printf("\n%s= %d vogais",palavras[posicao],cont2);
+		}
+	cont2=0;
+		}
+	return 0;
 }
