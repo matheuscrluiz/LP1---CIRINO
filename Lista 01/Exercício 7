@@ -1,0 +1,81 @@
+/*7) Escreva um programa em C onde, se possa representar os nomes e as notas de alunos de um curso da
+universidade. O programa deverá imprimir os nomes dos cinco alunos que obtiverem as maiores notas
+acima da média da turma. Considerar que a turma tenha 50 alunos. Usar a estrutura multivalorada vista em
+sala de aula. */
+
+#include <stdio.h>
+#include <string.h>
+
+struct Alunos
+{
+	char nomes[255];
+	float notas;
+
+};
+
+int main (void)
+{
+	int n_alunos = 50;	
+	struct Alunos p1[n_alunos];
+	int i,j;
+	float media;
+
+	
+	for(i=0;i<n_alunos;i++)
+		{
+			printf("\nDigite o nome do aluno %d: ", i);
+			scanf("%s", p1[i].nomes);
+			
+			printf("\nDigite a nota do aluno %d: ", i);
+			scanf("%f", &p1[i].notas);
+
+			media = (media + p1[i].notas);
+		}
+
+	media = media/n_alunos;
+
+
+	for(i=0;i<n_alunos;i++)
+		{
+			printf("\n\nAluno: %s - Nota: %f", p1[i].nomes, p1[i].notas);
+		}
+
+
+	printf("\n\n\n     Média da turma: %.2f\n\n", media);
+
+	float aux;
+	char aux_nomes[255];
+	for(i=0;i<n_alunos;i++)
+		{ /*ordenando vetor */
+			for(j=i;j<n_alunos;j++)
+				{
+					if(p1[i].notas < p1[j].notas)
+						{
+							aux = p1[i].notas;
+							p1[i].notas = p1[j].notas;
+							p1[j].notas = aux;
+							strcpy(aux_nomes, p1[i].nomes); /*anexando os nomes as notas certas*/
+							strcpy(p1[i].nomes, p1[j].nomes);
+							strcpy(p1[j].nomes,aux_nomes);
+						}
+				}
+		}	
+
+	printf("\n\n\n\n   Notas e nomes ordenados:    ");
+	for(i=0;i<n_alunos;i++)
+		{
+			printf("\n\nAluno: %s - Nota: %f", p1[i].nomes, p1[i].notas);
+		}
+
+	printf("\n\n\n\n");
+	printf("As maiores notas acima da média: ");
+	for(i=0;i<5;i++) /*exibindo as 5 maiores médias */
+		{
+			if(p1[i].notas > media)
+				{
+					printf("\n%s",p1[i].nomes);
+				}  
+		}
+
+	return 0;
+}
