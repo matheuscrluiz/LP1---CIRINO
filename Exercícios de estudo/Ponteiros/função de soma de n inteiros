@@ -1,0 +1,42 @@
+/* receba dois números inteiros positivos por parametro e retorne a soma dos N numeros inteiros existentes entre eles */
+
+#include <stdio.h>
+
+void maior(int *p1, int *p2)
+{
+	int i;
+	int soma;
+	
+	if(*p1 > *p2)
+		{
+			for(i=*p2;i<*p1;i++)
+				{
+					printf("\n %d ", i);
+					soma = soma + i;
+				}
+		}
+	else
+		{
+			for(i=*p1;i<*p2;i++)
+				{
+					printf("\n %d ", i);
+					soma = soma + i;
+				}
+		}
+
+	printf("\nA soma é: %d", soma);
+}
+
+int main (void)
+{
+	int n1, n2;
+
+	printf("\nDigite o primeiro valor: ");
+	scanf("%d", &n1);
+	printf("\nDigite o segundo valor: ");
+	scanf("%d", &n2);
+
+	maior(&n1, &n2);
+
+	return 0;
+}
