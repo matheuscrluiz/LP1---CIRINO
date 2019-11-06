@@ -1,0 +1,143 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<errno.h>
+#include<string.h>
+
+#define MAXNOME 100
+struct aluno{
+  int matricula;
+  char nome[MAXNOME];
+  float media;
+};
+
+typedef struct aluno Aluno;
+
+struct no{
+  Aluno* dados;
+  struct no* prox;
+};
+
+typedef struct no No;
+
+No* criar_lista(){
+  No* tmp = (No*) malloc(sizeof(No));
+  
+  if (tmp == NULL) {
+    printf("%s\n", strerror(errno));
+    exit(1);
+  }
+  
+  tmp->dados = NULL;
+  tmp->prox = NULL;
+  
+  return tmp;
+}
+
+Aluno* criar_aluno() {
+  Aluno* no_aluno = (Aluno*) malloc(sizeof(Aluno));
+  if (no_aluno == NULL) {
+    printf("%s\n", strerror(errno));
+    exit(1);
+  }
+  return no_aluno;
+}
+
+Aluno* ler_aluno() {
+  
+  Aluno* no_aluno = criar_aluno();
+  
+  printf("Informe a matrícula:");
+  scanf("%d%*c", &(no_aluno->matricula));
+  
+  printf("Informe o nome:");
+  fgets(no_aluno->nome, 100, stdin);
+  (*strrchr(no_aluno->nome, '\n')) = '\0';
+  
+  printf("Informe a média:");
+  scanf("%f", &(no_aluno->media));
+  
+  return no_aluno;
+}
+
+No* inserir_ordenado(No* lista_alunos, Aluno* aluno) {
+  if(lista_alunos == NULL) {
+    return -1;
+  }
+  
+  int posicao = 0;
+  No* elemento = lista_alunos;
+  No* anterior = NULL;
+  if (elemento->dados == NULL && elemento->prox == NULL) {
+    lista_alunos->dados = aluno;
+  
+  } else {
+    
+    while (elemento != NULL && elemento->dados->matricula < aluno->matricula) {
+      anterior = elemento;
+      elemento = elemento->prox;
+    }
+    
+    No * tmp = (No*) malloc(sizeof(No));
+    if (tmp == NULL) {
+      printf("%s",strerror(errno));
+      free(lista_alunos);
+      free(aluno);
+      exit(1);
+    }
+    
+    tmp->dados = aluno;
+    
+    if (anterior == NULL) {
+      tmp->prox = lista_alunos;
+      return tmp;
+    } else {
+      if (elemento == NULL) {
+        tmp->prox = NULL;
+        anterior->prox = tmp;
+      } else {
+        tmp->prox = elemento;
+        anterior->prox = tmp;
+      }
+    }
+  }
+  
+  return lista_alunos;
+}
+
+void imprimir(const No* lista_alunos) {
+  No* tmp = lista_alunos;
+  while(tmp != NULL) {
+    if (tmp->dados != NULL) {
+      printf("Nome:%s\tMatrícula:%d\tMédia:%.2f\n", tmp->dados->nome, tmp->dados->matricula, tmp->dados->media);
+    }
+    tmp = tmp->prox;
+  }
+}
+
+void desalocar(No* l) {
+  if (l->prox == NULL) {
+    free(l);
+    return;
+  } else {
+    desalocar(l->prox);
+    free(l);
+  }
+}
+int main(){
+  No* lista_alunos = criar_lista();
+  imprimir(lista_alunos);
+  
+  Aluno * aluno;
+  
+  for(int i =0 ; i<5; i++) {
+    aluno = ler_aluno();
+    lista_alunos = inserir_ordenado(lista_alunos, aluno);
+  }
+  
+  imprimir(lista_alunos);
+  
+  
+  free(aluno);
+  desalocar(lista_alunos);
+  return 0;
+}
