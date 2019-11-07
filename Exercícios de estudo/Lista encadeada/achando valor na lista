@@ -1,0 +1,93 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <curses.h>
+
+struct lista
+{
+	int num;
+	struct lista *proximo;
+};
+
+struct lista *primeiro;
+struct lista *ultimo;
+
+void Filavazia()
+{
+	struct lista *aux;
+	aux = (struct lista*)malloc(sizeof(struct lista));
+	primeiro = aux;
+	ultimo = primeiro;
+}
+
+void insere(int x)
+{
+	struct lista *aux;
+	aux = (struct lista*)malloc(sizeof(struct lista));
+
+	aux->num=x; 
+	ultimo ->proximo = aux;
+	ultimo = ultimo -> proximo;
+	aux ->proximo = NULL;
+
+}
+
+void imprime ()
+{
+	struct lista *aux;
+	aux = primeiro->proximo;
+	
+	while(aux != NULL)
+		{
+			printf("\nItem = %d ", aux->num);
+			aux = aux->proximo;
+		}
+
+}
+
+void pesquisa(int x)
+{
+	struct lista *aux;
+	int flag = 0; 
+	aux = primeiro -> proximo;
+	while(aux != NULL)
+		{
+			if(aux -> num == x)
+				{
+					printf("\nNúmero %d encontrado!", x);
+					flag = 1;
+					break;
+				}
+			else
+				{
+					aux = aux -> proximo;
+				}
+		}
+	if(flag == 0)
+		{	
+			printf("\nO item %d não foi encontrado!!!!!", x);
+		}
+}
+
+int main (void)
+{
+	int op = 2;
+	int codigo;
+	Filavazia();
+	
+	while(op != 0)
+		{
+			printf("\nDigite o codigo: ");
+			scanf("%d", &codigo);
+			
+			insere(codigo);
+			printf("\nContinuar? \n 1- SIM \n 0- NÃO \n");
+			scanf("%d", &op);
+		}
+	imprime();	
+	printf("\nDigite o número a ser procurado: ");
+	scanf("%d", &codigo);
+	pesquisa(codigo);
+
+
+ 	return 0;
+}
