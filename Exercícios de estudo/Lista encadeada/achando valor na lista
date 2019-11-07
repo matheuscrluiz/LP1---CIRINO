@@ -14,12 +14,14 @@ struct lista *ultimo;
 void Filavazia()
 {
 	struct lista *aux;
-	aux = (struct lista*)malloc(sizeof(struct lista));
+	aux = (struct lista*)malloc(sizeof(struct lista)); /*alocando espaço na memoria para aux */
 	primeiro = aux;
 	ultimo = primeiro;
+
+	/*primeiro recebe aux e ultimo recebe primeiro, logo, todas vao estar apontando pro mesmo lugar, a origem. */  
 }
 
-void insere(int x)
+void insere(int x) /*recebe elemento x inserido, no caso, o NUM*/
 {
 	struct lista *aux;
 	aux = (struct lista*)malloc(sizeof(struct lista));
@@ -27,7 +29,7 @@ void insere(int x)
 	aux->num=x; 
 	ultimo ->proximo = aux;
 	ultimo = ultimo -> proximo;
-	aux ->proximo = NULL;
+	aux ->proximo = NULL; /*condição de parada*/
 
 }
 
@@ -44,7 +46,7 @@ void imprime ()
 
 }
 
-void pesquisa(int x)
+void pesquisa(int x) /*item q quer procurar e vai ser comparado com todos os itens da lista ultimo */
 {
 	struct lista *aux;
 	int flag = 0; 
@@ -59,7 +61,7 @@ void pesquisa(int x)
 				}
 			else
 				{
-					aux = aux -> proximo;
+					aux = aux -> proximo;  /*andar com a lista */
 				}
 		}
 	if(flag == 0)
@@ -72,7 +74,7 @@ int main (void)
 {
 	int op = 2;
 	int codigo;
-	Filavazia();
+	Filavazia(); /*inicializando */
 	
 	while(op != 0)
 		{
