@@ -1,0 +1,21 @@
+criar uma fila vazia
+struct aux 
+malloc no aux
+primeiro recebe aux
+ultimo recebe primeiro
+
+
+
+inserir recebe valor
+struct aux
+malloc no aux
+aux valor do struct lista apontado recebe valor do parametro
+ultimo apontado pro proximo recebe aux
+ultimo recebe ultimo apontado pro proximo
+aux apontado pro prox recebe null 
+
+
+imprime
+
+strut aux
+aux recebe o primeiro apontando pro proximo
