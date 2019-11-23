@@ -1,0 +1,152 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+struct lista
+{
+	int numero;
+	struct lista *proximo;
+
+};
+
+struct lista *primeiro;
+struct lista *ultimo;
+
+void fila()
+{
+	struct lista *aux;
+	aux = (struct lista *)malloc(sizeof(struct lista));
+
+	primeiro = aux;
+	ultimo = primeiro;
+
+
+}
+
+void insere (int x)
+{
+	struct lista *aux;
+	aux = (struct lista *)malloc(sizeof(struct lista)); 
+	aux -> numero = x;
+	ultimo -> proximo = aux;
+	ultimo = ultimo -> proximo;
+	aux -> proximo = NULL;
+
+}
+
+
+void imprime()
+{
+	struct lista *aux;
+	
+	aux = primeiro -> proximo;
+
+	while(aux != NULL)
+		{
+			printf("\n %d ", aux -> numero);
+			aux = aux -> proximo;
+		}
+
+}
+
+void pesquisa (int x)
+{
+	struct lista *aux;
+	aux = primeiro -> proximo;
+	int parada = 1;
+
+	while(aux != NULL)
+		{
+			if(aux -> numero == x)
+				{
+					printf("\n O número %d foi encontrado na lista! ", x);
+					parada = 0;	
+					break;
+					
+				}
+			else
+				{
+					aux = aux -> proximo; /*andar com a lista */
+				}
+		}
+	if(parada == 1)
+		{
+			printf("\nO número %d não foi encontrado na lista! ", x);
+		}
+
+
+}
+
+
+void remover(int x)
+{
+	struct lista *aux;
+	struct lista *sentinela;
+	aux = primeiro -> proximo; /*aux esta no segundo elemento */
+	sentinela = primeiro; /*sentinela esta no primeiro elemento */
+	int parada = 1;
+
+	while(aux != NULL)
+		{
+			if(aux -> numero == x)
+				{
+					printf("\n O número %d foi removido da lista! ", x);
+					sentinela -> proximo = aux ->proximo;
+					aux = NULL;
+					parada = 0;	
+					break;
+					
+				}
+			else
+				{
+					aux = aux -> proximo; /*andar com a lista aux */
+					sentinela = sentinela -> proximo; /*andar com a lista sentinela*/
+				}
+		}
+	if(parada == 1)
+		{
+			printf("\nO número %d não foi encontrado na lista! ", x);
+		}
+
+
+}
+
+
+int main (void)
+{
+	int op, n;
+
+	fila();
+
+	while(op != 0)
+		{
+			printf("\nDigite: ");
+			scanf("%d", &n);
+			insere(n);
+			printf("\nDeseja continuar inserindo valores na lista? \n1-sim \n0-não\n");
+			scanf("%d", &op);
+			if(op == 0)
+				{
+					break;
+				}
+
+		}
+
+	imprime();
+
+	printf("\nDigite o valor que deseja procurar na lista: ");
+	scanf("%d", &n);
+
+	pesquisa(n);
+	
+	printf("\nDigite o valor que deseja remover da lista: ");
+	scanf("%d", &n);
+
+	remover(n);
+
+	imprime();
+
+
+	return 0;
+
+}
