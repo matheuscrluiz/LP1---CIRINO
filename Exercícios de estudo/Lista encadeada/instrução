@@ -16,6 +16,18 @@ aux apontado pro prox recebe null
 
 
 imprime
-
 strut aux
 aux recebe o primeiro apontando pro proximo
+
+pesquisa recebe valor
+struct aux 
+o aux recebe o primeiro apontado pro proximo
+condição de parada (flag)
+
+remover recebe valor
+struct aux
+struct sentinela 
+aux recebe primeiro apontado pro proximo
+sentinela recebe primeiro 
+condição de parada (flag)
+sentinela apontado pro proximo igual ao aux apontado pro proximo
