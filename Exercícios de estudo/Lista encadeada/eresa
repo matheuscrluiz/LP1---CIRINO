@@ -1,0 +1,207 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct cliente{
+    int id;
+    char cliente[200];
+    struct cliente *prox;
+}lcam;
+
+typedef struct pedido{
+    int id;
+    char produto[200];
+    
+    struct pedido *prox;
+}lcar;
+
+
+void cad_cam(lcam **cabeca);
+void cad_car(lcar **carcabeca);
+void imp_cam(lcam *cabeca);
+void imp_car(lcar *carcabeca);
+void salvacam(lcam **cabeca);
+
+int main()
+{
+   
+
+    lcam *cabeca = NULL;        
+    lcam *noatual;    
+
+    lcar *carcabeca = NULL;
+    lcar *carnoatual; 
+
+    int op;
+
+    printf("0 - Fechar \n");
+    printf("1 - Cadastrar Cliente \n");
+    printf("2 - Cadastrar pedido \n");
+    printf("4 - Imprimir Cliente\n" );
+    printf("5 - Imprimir pedido\n");
+    printf("7 - Salvar Cliente em Arquivo \n");
+
+    printf("Digite uma opcao: \n");
+    scanf("%d", &op);
+
+    while(op!=0){
+    switch(op){
+            case 0:{
+                op=0;
+                break;
+             }
+             break;
+            case 1: cad_cam(&cabeca);
+                    break;
+            case 2: cad_car(&carcabeca);
+                    break;
+            case 4: imp_cam(cabeca);
+                    break;
+            case 5: imp_car(carcabeca);     
+                    break;
+            case 7:salvacam(&cabeca);
+                   break;
+        }
+    printf("0 - Fechar \n");
+    printf("1 - Cadastrar Cliente \n");
+    printf("2 - Cadastrar pedido \n");
+    printf("4 - Imprimir Cliente\n" );
+    printf("5 - Imprimir pedido\n");
+    printf("7 - Salvar Cliente em Arquivo \n");
+
+    printf("Digite uma opcao: \n");
+    scanf("%d", &op);
+    } 
+}
+
+
+void cad_cam (lcam **cabeca)
+{
+   
+
+    lcam *noatual, *novono;
+
+    int id;
+    char cli[200];
+   
+
+    printf("ID:\n");
+    scanf("%d", &id);
+    setbuf(stdin, NULL);
+    printf("Cliente:\n");
+    scanf("%s", cli);
+    setbuf(stdin, NULL);
+   
+    
+    if (*cabeca == NULL)   
+    {
+        *cabeca = malloc(sizeof(lcam));
+        (*cabeca)->id = id;
+        strcpy((*cabeca)->cliente, cli);
+        
+        (*cabeca)->prox = NULL;
+    }
+        else{
+        noatual = *cabeca;
+        while(noatual->prox != NULL)
+            noatual = noatual->prox;    
+        novono =  malloc(sizeof(lcam));
+        novono->id = id;
+        strcpy(novono->cliente, cli);
+        
+        novono->prox = NULL;
+        noatual->prox = novono;
+    }
+}
+
+void cad_car (lcar **carcabeca)
+{
+    
+
+    lcar *carnoatual, *carnovono;
+
+    int id;
+    char comida[200];
+    
+
+    printf("ID:\n");
+    scanf("%d", &id);
+    setbuf(stdin, NULL);
+    printf("Produto:\n");
+    scanf("%s", comida);
+    
+    if (*carcabeca == NULL)   
+    {
+        *carcabeca = malloc(sizeof(lcar));
+        (*carcabeca)->id = id;
+        strcpy((*carcabeca)->produto, comida);
+        (*carcabeca)->prox = NULL;
+    }
+        else{
+        carnoatual = *carcabeca;
+        while(carnoatual->prox != NULL)
+            carnoatual = carnoatual->prox;    
+        carnovono =  malloc(sizeof(lcar));
+        carnovono->id = id;
+        strcpy(carnovono->produto, comida);
+        carnovono->prox = NULL;
+        carnoatual->prox = carnovono;
+    }
+}
+void imp_cam(lcam *noatual)
+{
+    while( noatual != NULL)    
+    {
+        printf("\nID:%d\n", noatual->id);
+        printf("cliente:%s\n", noatual->cliente);
+        noatual = noatual->prox; 
+    }
+}
+void imp_car(lcar *carnoatual)
+{
+    while( carnoatual != NULL)    
+    {
+        printf("\nID:%d\n", carnoatual->id);
+        printf("Produto:%s\n", carnoatual->produto);
+        carnoatual = carnoatual->prox; 
+    }
+}
+void salvacam(lcam **cabeca){
+	lcar **carcabeca;
+    lcam *noatual = cabeca;
+	lcar *carnoatual = carcabeca;
+
+    FILE *arquivo;
+    arquivo = fopen("texto.txt", "w");
+    if(arquivo == NULL){
+        printf("Erro na Abertura do Arquivo");
+    }
+    else{
+        if(noatual == NULL){
+            fprintf(arquivo,"Lista Vazia!\n");
+        }
+        else{
+            while(noatual != NULL){
+				if(carnoatual->id == noatual->id)
+					{
+                		fprintf(arquivo,"ID:%d\n", noatual->id);
+                		fprintf(arquivo,"cliente:%s\n", noatual->cliente);
+						fprintf(arquivo,"produto:%s\n", carnoatual->produto);
+                	}
+                noatual = noatual->prox;
+            }
+            printf("Salvo com Sucesso!");
+
+        }
+        fclose(arquivo);
+    }
+
+	arquivo = fopen("texto.txt", "r");
+	while(noatual != NULL)
+		{
+			printf("\n %d ", noatual->id);
+			printf("cliente:%s\n", noatual->cliente);
+			printf("produto:%s\n", carnoatual->produto);
+			
+		}
+}
