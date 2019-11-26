@@ -1,0 +1,298 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+#include <string.h>
+
+typedef struct cliente{
+    int id;
+    char motorista[200];
+    struct cliente *prox;
+}lcam;
+
+typedef struct pedido{
+    int id;
+    char produto[200];
+    
+    struct cargas *prox;
+}lcar;
+
+ typedef struct cidades{
+    int id;
+    char nome[200];
+    char vizinhos[200];
+    char distancia[200];
+    float vc;
+    struct cidades *prox;
+}lcid;
+
+
+void cad_cam(lcam **cabeca);
+void cad_car(lcar **carcabeca);
+void cad_cid(lcid **cidcabeca);
+void imp_cam(lcam *cabeca);
+void imp_car(lcar *carcabeca);
+void imp_cid(lcid *cidcabeca);
+void salvacam(lcam **cabeca);
+
+int main()
+{
+   
+
+    lcam *cabeca = NULL;        
+    lcam *noatual;    
+
+    lcar *carcabeca = NULL;
+    lcar *carnoatual; 
+
+    lcid *cidcabeca = NULL;
+    lcid *cidnoatual;
+
+    int op;
+
+    printf("0 - Fechar \n");
+    printf("1 - Cadastrar Cliente \n");
+    printf("2 - Cadastrar pedido \n");
+    printf("3 - Cadastrar Cidade \n");
+    printf("4 - Imprimir Cliente\n" );
+    printf("5 - Imprimir Cargas\n");
+    printf("6 - Imprimir Cidades\n");
+    printf("7 - Salvar Cliente em Arquivo \n");
+    printf("8 - Excluir Cargas \n");
+    printf("9 - Excluir Cidades \n");
+    printf("10 - Relatórios \n");
+
+    printf("Digite uma opcao: \n");
+    scanf("%d", &op);
+
+    while(op!=0){
+    switch(op){
+            case 0:{
+                op=0;
+                break;
+             }
+             break;
+            case 1: cad_cam(&cabeca);
+                    break;
+            case 2: cad_car(&carcabeca);
+                    break;
+            case 3: cad_cid(&cidcabeca);
+                    break;  
+            case 4: imp_cam(cabeca);
+                    break;
+            case 5: imp_car(carcabeca);     
+                    break;
+            case 6:imp_cid(cidcabeca);
+                   break;
+            case 7:salvacam(&cabeca);
+                   break;
+            case 8:
+                   break;
+            case 9:
+                   break;
+            case 10:
+                   break;         
+        }
+    printf("0 - Fechar \n");
+    printf("1 - Cadastrar Cliente \n");
+    printf("2 - Cadastrar pedido \n");
+    printf("3 - Cadastrar Cidade \n");
+    printf("4 - Imprimir Cliente\n" );
+    printf("5 - Imprimir Cargas\n");
+    printf("6 - Imprimir Cidades\n");
+    printf("7 - Salvar Cliente em Arquivo \n");
+    printf("8 - Excluir Cargas \n");
+    printf("9 - Excluir Cidades \n");
+    printf("10 - Relatórios \n");
+
+    printf("Digite uma opcao: \n");
+    scanf("%d", &op);
+    } 
+}
+
+
+void cad_cam (lcam **cabeca)
+{
+    setlocale(LC_ALL, "Portuguese");
+
+    lcam *noatual, *novono;
+
+    int id;
+    char mot[200];
+   
+
+    printf("ID:\n");
+    scanf("%d", &id);
+    setbuf(stdin, NULL);
+    printf("Cliente:\n");
+    scanf("%s", mot);
+    setbuf(stdin, NULL);
+   
+    
+    if (*cabeca == NULL)   
+    {
+        *cabeca = malloc(sizeof(lcam));
+        (*cabeca)->id = id;
+        strcpy((*cabeca)->motorista, mot);
+        
+        (*cabeca)->prox = NULL;
+    }
+        else{
+        noatual = *cabeca;
+        while(noatual->prox != NULL)
+            noatual = noatual->prox;    
+        novono =  malloc(sizeof(lcam));
+        novono->id = id;
+        strcpy(novono->motorista, mot);
+        
+        novono->prox = NULL;
+        noatual->prox = novono;
+    }
+}
+
+void cad_car (lcar **carcabeca)
+{
+    
+
+    lcar *carnoatual, *carnovono;
+
+    int id;
+    char prod[200];
+    
+
+    printf("ID:\n");
+    scanf("%d", &id);
+    setbuf(stdin, NULL);
+    printf("Produto:\n");
+    scanf("%s", prod);
+    
+    if (*carcabeca == NULL)   
+    {
+        *carcabeca = malloc(sizeof(lcar));
+        (*carcabeca)->id = id;
+        strcpy((*carcabeca)->produto, prod);
+        (*carcabeca)->prox = NULL;
+    }
+        else{
+        carnoatual = *carcabeca;
+        while(carnoatual->prox != NULL)
+            carnoatual = carnoatual->prox;    
+        carnovono =  malloc(sizeof(lcar));
+        carnovono->id = id;
+        strcpy(carnovono->produto, prod);
+        
+        carnovono->prox = NULL;
+        carnoatual->prox = carnovono;
+    }
+}
+
+void cad_cid (lcid **cidcabeca)
+{
+
+
+    lcid *cidnoatual, *cidnovono;
+
+    int id;
+    char nome[200];
+    char viz[200];
+    char dist[200];
+    float vac;
+
+    printf("ID:\n");
+    scanf("%d", &id);
+    setbuf(stdin, NULL);
+    printf("Nome da Cidade:\n");
+    scanf("%s", nome);
+    setbuf(stdin, NULL);
+    printf("Digite o Valor do Combistível:\nR$");
+    scanf("%f", &vac);
+    setbuf(stdin, NULL);
+
+
+    if (*cidcabeca == NULL)   
+    {
+        *cidcabeca = malloc(sizeof(lcid));
+        (*cidcabeca)->id = id;
+        strcpy((*cidcabeca)->nome, nome);
+        (*cidcabeca)->vc = vac;
+        (*cidcabeca)->prox = NULL;
+    }
+        else{
+        cidnoatual = *cidcabeca;
+        while(cidnoatual->prox != NULL)
+            cidnoatual = cidnoatual->prox;    
+        cidnovono =  malloc(sizeof(lcid));
+        cidnovono->id = id;
+        strcpy(cidnovono->nome, nome);
+        cidnovono->vc = vac;
+        cidnovono->prox = NULL;
+        cidnoatual->prox = cidnovono;
+    }
+}
+
+
+
+void imp_cam(lcam *noatual)
+{
+   
+
+    while( noatual != NULL)    
+    {
+        printf("\nID:%d\n", noatual->id);
+        printf("Motorista:%s\n", noatual->motorista);
+        
+        noatual = noatual->prox; 
+    }
+}
+
+void imp_car(lcar *carnoatual)
+{
+    
+
+    while( carnoatual != NULL)    
+    {
+        printf("\nID:%d\n", carnoatual->id);
+        printf("Produto:%s\n", carnoatual->produto);
+        
+        carnoatual = carnoatual->prox; 
+    }
+}
+
+void imp_cid(lcid *cidnoatual)
+{
+    
+
+    while( cidnoatual != NULL)    
+    {
+        printf("\nID:%d\n", cidnoatual->id);
+        printf("Nome da Cidade:%s\n", cidnoatual->nome);
+        printf("Valor do Combustível:%.2f\n", cidnoatual->vc);
+        cidnoatual = cidnoatual->prox; 
+    }
+}
+
+void salvacam(lcam **cabeca){
+
+    lcam *noatual = cabeca;
+
+    FILE *arquivo;
+    arquivo = fopen("texto.txt", "w");
+    if(arquivo == NULL){
+        printf("Erro na Abertura do Arquivo");
+    }
+    else{
+        if(noatual == NULL){
+            fprintf(arquivo,"Lista Vazia!\n");
+        }
+        else{
+            while(noatual != NULL){
+                fprintf(arquivo,"ID:%d\n", noatual->id);
+                fprintf(arquivo,"Motorista:%s\n", noatual->motorista);
+                
+                noatual = noatual->prox;
+            }
+            printf("Salvo com Sucesso!");
+
+        }
+        fclose(arquivo);
+    }
+}
